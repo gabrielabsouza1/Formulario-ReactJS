@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from "react-hook-form";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Form, Row, Stack, Button, Container } from 'react-bootstrap';
+import { Form, Row, Stack } from 'react-bootstrap';
 
 function DadosPessoais() {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { watch, register, handleSubmit, formState: { errors } } = useForm({mode: 'all'});
     const onSubmit = (data) => console.log(data);
-    const [promocoes, setPromocoes] = useState(true);
-    const [novidades, setNovidades] = useState(true);
     const initialValues = {
         nome: '',
         sobrenome: '',
         cpf: '',
+        promocoes: true,
+        novidades: true,
     };
 
     return (
-        <Form className="mx-auto" 
+        <div className="mx-auto" 
         onSubmit={handleSubmit(onSubmit)}>
             <section className="d-flex align-items-center flex-column">
                 <Form.Group className="mb-3 col-sm-6">
@@ -61,10 +61,8 @@ function DadosPessoais() {
                 <Row>
                     <Form.Group className="mb-3" controlId="formBasicCheckbox">
                         <Form.Check
-                            onChange={(event) => {
-                                setPromocoes(event.target.checked)
-                            }}
-                            defaultChecked={promocoes}
+                            defaultValue={initialValues.promocoes}
+                            {...register('promocoes')}
                             type="switch"
                             id="custom-switch"
                             label="Promoções" />
@@ -73,24 +71,16 @@ function DadosPessoais() {
                 <Row>
                     <Form.Group className="mb-3" controlId="formBasicCheckbox">
                         <Form.Check
-                            onChange={(event) => {
-                                setNovidades(event.target.checked)
-                            }}
-                            defaultChecked={novidades}
+                            defaultValue={initialValues.novidades}
+                            {...register('novidades')}
                             type="switch"
                             id="custom-switch"
                             label="Novidades" />
                     </Form.Group>
                 </Row>
             </Stack>
-            <Container className="d-flex justify-content-center mt-3 mb-4">
-                <Button
-                    type='submit'
-                    className="button-style">
-                    Cadastrar
-                </Button>
-            </Container>
-        </Form>
+            <pre>{JSON.stringify(watch(), null, 2)}</pre>
+        </div>
     );
 }
 export default DadosPessoais;

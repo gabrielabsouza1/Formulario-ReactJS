@@ -1,10 +1,10 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Form, Button, Container } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
 function DadosEntrega () {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { watch, register, handleSubmit, formState: { errors } } = useForm({mode: 'all'});
     const onSubmit = (data) => console.log(data);
     const initialValues = {
         cep: '',
@@ -15,7 +15,7 @@ function DadosEntrega () {
     };
     
     return(
-        <Form className="mx-auto" onSubmit={handleSubmit(onSubmit)}>
+        <div className="mx-auto" onSubmit={handleSubmit(onSubmit)}>
             <section className="d-flex align-items-center flex-column">
             <Form.Group className="mb-3 col-sm-6">
                 <Form.Label>CEP *</Form.Label>
@@ -23,7 +23,7 @@ function DadosEntrega () {
                     defaultValue={initialValues.cep}
                     {...register('cep', { validate: (value) => value.length > 0 })}
                     type="number"
-                    placeholder="Sua senha" />
+                    placeholder="Seu CEP" />
                 {errors.cep && <p id='mensagemErro'>O campo está vazio</p>}
             </Form.Group>
 
@@ -32,8 +32,8 @@ function DadosEntrega () {
                 <Form.Control
                     defaultValue={initialValues.endereço}
                     {...register('endereço', { validate: (value) => value.length > 0 })}
-                    type="number"
-                    placeholder="Sua senha" />
+                    type="text"
+                    placeholder="Seu endereço" />
                 {errors.endereço && <p id='mensagemErro'>O campo está vazio</p>}
             </Form.Group>
 
@@ -42,8 +42,8 @@ function DadosEntrega () {
                 <Form.Control
                     defaultValue={initialValues.estado}
                     {...register('estado', { validate: (value) => value.length > 0 })}
-                    type="number"
-                    placeholder="Sua senha" />
+                    type="text"
+                    placeholder="Seu estado" />
                 {errors.estado && <p id='mensagemErro'>O campo está vazio</p>}
             </Form.Group>
 
@@ -52,8 +52,8 @@ function DadosEntrega () {
                 <Form.Control
                     defaultValue={initialValues.cidade}
                     {...register('cidade', { validate: (value) => value.length > 0 })}
-                    type="number"
-                    placeholder="Sua senha" />
+                    type="text"
+                    placeholder="Sua cidade" />
                 {errors.cidade && <p id='mensagemErro'>O campo está vazio</p>}
             </Form.Group>
             
@@ -77,14 +77,8 @@ function DadosEntrega () {
                     )}
                 </Form.Group>
             </section>
-            <Container className="d-flex justify-content-center mt-3 mb-4">
-                <Button
-                    type='submit'
-                    className="button-style">
-                    Finalizar Cadastro
-                </Button>
-            </Container>
-            </Form>
+            <pre>{JSON.stringify(watch(), null, 2)}</pre>
+            </div>
     );
 }
 export default DadosEntrega;
