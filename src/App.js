@@ -4,6 +4,7 @@ import FormularioCadastro from './components/FormularioCadastro/FormularioCadast
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+
   return (
     <Fragment>
     <h1 className="container d-flex align-items-center flex-column bd-highlight mt-2">Formulário de cadastro</h1>
@@ -15,5 +16,6 @@ function App() {
 function aoEnviarForm(data) {
   console.log (data);
 }
+
 
 export default App;

@@ -26,12 +26,15 @@ function FormularioCadastro({aoEnviar}) {
       }
 
     function proximo () {
-        setEtapaAtual(etapaAtual+1);
+        setEtapaAtual(etapaAtual => etapaAtual+1);
     }
 
     return (
       <>
-      {formularios[etapaAtual]}
+      {etapaAtual === 0 && <DadosUsuario/>}
+      {etapaAtual === 1 && <DadosPessoais/>}
+      {etapaAtual === 2 && <DadosEntrega/>}
+      {etapaAtual !== 3 && <button className="button-style" onClick={coletarDados}> Próxima pagina</button>}
       </>
     );
 }
