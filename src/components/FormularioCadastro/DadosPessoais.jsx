@@ -1,11 +1,15 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Form, Row, Stack } from 'react-bootstrap';
+import { Form, Row, Stack, Button, Container } from 'react-bootstrap';
 
 function DadosPessoais() {
-    const { watch, register, handleSubmit, formState: { errors } } = useForm({mode: 'all'});
-    const onSubmit = (data) => console.log(data);
+    const { getValues, register, handleSubmit, formState: { errors } } = useForm({mode: 'all'});
+    //const valoresPessoais = JSON.stringify(watch(), {}, 2);
+    const onSubmit = (data) => {
+        console.log(JSON.stringify(data))
+    }
+
     const initialValues = {
         nome: '',
         sobrenome: '',
@@ -79,7 +83,17 @@ function DadosPessoais() {
                     </Form.Group>
                 </Row>
             </Stack>
-            <pre>{JSON.stringify(watch(), null, 2)}</pre>
+            <Container className="d-flex justify-content-center mt-3 mb-4">
+          <Button
+            onClick={() => {
+                const values = getValues();
+                console.log(values);
+            }}
+            type='submit'
+            className="button-style">
+            Próximo
+          </Button>
+        </Container>
         </div>
     );
 }

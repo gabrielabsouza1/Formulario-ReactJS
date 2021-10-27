@@ -1,11 +1,15 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Form } from 'react-bootstrap';
+import { Form, Button, Container } from 'react-bootstrap';
 
 function DadosEntrega () {
-    const { watch, register, handleSubmit, formState: { errors } } = useForm({mode: 'all'});
-    const onSubmit = (data) => console.log(data);
+    const { getValues, register, handleSubmit, formState: { errors } } = useForm({mode: 'all'});
+    
+    const onSubmit = (data) => {
+        console.log(JSON.stringify(data))
+    }
+
     const initialValues = {
         cep: '',
         endereço: '',
@@ -76,8 +80,19 @@ function DadosEntrega () {
                         <p id='mensagemErro'>O telefone deve ter no mínimo 11 dígitos</p>
                     )}
                 </Form.Group>
+                <Container className="d-flex justify-content-center mt-3 mb-4">
+          <Button
+            onClick={() => {
+                const values = getValues();
+                console.log(values);
+            }}
+            type='submit'
+            className="button-style">
+            Finalizar
+          </Button>
+        </Container>
             </section>
-            <pre>{JSON.stringify(watch(), null, 2)}</pre>
+            
             </div>
     );
 }

@@ -8,10 +8,13 @@ function App() {
   return (
     <Fragment>
     <h1 className="container d-flex align-items-center flex-column bd-highlight mt-2">Formulário de cadastro</h1>
-    <FormularioCadastro />
+    <FormularioCadastro aoEnviar={aoEnviarForm} />
     </Fragment>
   )
 }
 
+function aoEnviarForm(dados){
+  console.log(dados);
+}
 
 export default App;
